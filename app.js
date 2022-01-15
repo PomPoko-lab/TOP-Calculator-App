@@ -65,7 +65,7 @@ const resetStoredValue = () => {
 
 const storeDisplay = () => {
     if (storedValue === undefined) {
-        
+
     } else if (enteredOperator === '='){
         enteredDisplay.textContent += ` ${display.textContent} ${enteredOperator} ${storedValue}`;
     } else if (!(enteredOperator)) {
@@ -101,10 +101,12 @@ numberButtons.forEach(e =>{
 
 operatorButtons.forEach(e =>{
     e.addEventListener('click', e => {
-        storeOperator(e);
-        storeDisplay();
-        doCalculation();
-        resetDisplay();
+        if (display.textContent) {
+            storeOperator(e);
+            storeDisplay();
+            doCalculation();
+            resetDisplay();
+        }
     });
 });
 
