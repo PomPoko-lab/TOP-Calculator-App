@@ -115,13 +115,17 @@ body {
     margin: 0px;
 }
 
+.button {
+    border: none;
+    padding: 0;
+}
+
 .button:hover {
     /* background-color: rgba(125, 74, 47, 1); */
     background-color: rgba(159, 206, 237, 1);
     cursor: pointer;
 }
 
-.button {
-    border: none;
-    padding: 0;
+.button:active {
+    transform: scale(0.95);
 }
