@@ -6,4 +6,3 @@ Incomplete
 
 Bugs:
 - display doesn't wrap
-- some buttons do not work
