@@ -115,12 +115,12 @@ deleteButton.addEventListener('click', () => {
     display.textContent = x.slice(0, -1);
 });
 
-// decimalButton.addEventListener('click', () => {
-//     if (display.textContent.includes('.')) {
+decimalButton.addEventListener('click', () => {
+    if (display.textContent.includes('.')) {
 
-//     } else {
-//         storeValue();
-//         storedValue += '.';
-//         display.textContent += '.';''
-//     }
-// });d
+    } else {
+        // storeValue();
+        // storedValue += '.';
+        display.textContent += '.';''
+    }
+});
