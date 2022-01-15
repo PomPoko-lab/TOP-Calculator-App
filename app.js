@@ -5,24 +5,21 @@ const divide = (intA, intB) => intA / intB;
 const numberButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
 const display = document.querySelector('#calc-display');
+const enteredDisplay = document.querySelector('#entered-display');
 const resetButton = document.querySelector('.reset');
+const calculate = document.querySelector('#operate-all');
 
-let firstValue;
-let secondValue;
+let storedValue = null;
+let calculateValue = null;
 let enteredOperator;
 
 const displayNumber = input => {
     display.textContent += +input.srcElement.innerText;
-    // operateValues = +display.textContent;
 };
 
-const storeFirstValue = () => {
-    firstValue = +display.textContent;
-}
-
-const storeSecondValue = () => {
-    storeSecondValue = +display.textContent;
-}
+const storeValue = () => {
+    storedValue = +display.textContent;
+};
 
 const operate = (intA, intB, operator) => {
     switch (operator) {
@@ -43,35 +40,65 @@ const operate = (intA, intB, operator) => {
 
 const storeOperator = input =>{
     enteredOperator = input.srcElement.innerText;
-};
+}
 
 const resetDisplay = () => {
     display.innerHTML = `<p id='calc-display'></p>`;
 }
 
+const resetAllDisplay = () => {
+    display.innerHTML = `<p id='calc-display'></p>`;
+    enteredDisplay.innerHTML = `<p id='entered-display'></p>`;
+    storedValue = null;
+    calculateValue = null;
+}
+
+const storeDisplay = () => {
+    if (enteredOperator === '='){
+        enteredDisplay.textContent += ` ${display.textContent} ${enteredOperator} ${storedValue}`;
+    } else {
+        enteredDisplay.textContent += ` ${display.textContent} ${enteredOperator}`;
+    }
+}
+
+const setDisplay = value => {
+    display.textContent = value;
+}
+
+const doCalculation = () => {
+    if (storedValue === null) {
+        storeValue();
+        } else if ((+display.textContent === 0 && enteredOperator === '*') || (+display.textContent === 0 && enteredOperator === '/')) {
+            storedValue = operate(storedValue, 1, enteredOperator);
+        }
+            else {
+            storedValue = operate(storedValue, +display.textContent, enteredOperator);
+        }
+}
+
+
 numberButtons.forEach(e =>{
     e.addEventListener('click', e =>{
         displayNumber(e);
-        storeFirstValue(e);
     })
 });
 
 operatorButtons.forEach(e =>{
     e.addEventListener('click', e => {
         storeOperator(e);
+        storeDisplay();
+        doCalculation();
         resetDisplay();
     });
-})
-
-resetButton.addEventListener('click', () =>{
-    resetDisplay();
 });
 
+resetButton.addEventListener('click', () =>{
+    resetAllDisplay();
+});
 
-// displayNumber(display, 'hello');
-
-// const testNumA = 1;
-// const testNumB = 4;
-
-// console.log(operate(testNumA, testNumB, '*'));
-
+calculate.addEventListener('click', e => {
+    doCalculation();
+    storeOperator(e);
+    storeDisplay();
+    resetDisplay();
+});
