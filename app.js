@@ -64,7 +64,9 @@ const resetStoredValue = () => {
 }
 
 const storeDisplay = () => {
-    if (enteredOperator === '='){
+    if (storedValue === undefined) {
+        
+    } else if (enteredOperator === '='){
         enteredDisplay.textContent += ` ${display.textContent} ${enteredOperator} ${storedValue}`;
     } else if (!(enteredOperator)) {
         enteredDisplay.textContent += ` ${display.textContent}`;
@@ -82,8 +84,7 @@ const doCalculation = () => {
         storeValue();
         } else if ((+display.textContent === 0 && enteredOperator === '*') || (+display.textContent === 0 && enteredOperator === '/')) {
             storedValue = operate(storedValue, 1, enteredOperator);
-        }
-            else {
+        } else {
             storedValue = operate(storedValue, +display.textContent, enteredOperator);
         }
 }
@@ -119,7 +120,6 @@ calculate.addEventListener('click', e => {
 });
 
 deleteButton.addEventListener('click', () => {
-    // display.textContent.slice(0, -1)
     let x = display.textContent
     display.textContent = x.slice(0, -1);
 });
