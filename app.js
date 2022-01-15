@@ -9,7 +9,9 @@ const decimalButton = document.querySelector('#decimal');
 const display = document.querySelector('#calc-display');
 const enteredDisplay = document.querySelector('#entered-display');
 const resetButton = document.querySelector('.reset');
+const flipButton = document.querySelector('#flip-sign');
 const calculate = document.querySelector('#operate-all');
+const percentButton = document.querySelector('#percentage');
 
 let storedValue = null;
 let calculateValue = null;
@@ -89,6 +91,19 @@ const doCalculation = () => {
         }
 }
 
+const doValueFlip = () => {
+    if (!display.textContent.includes('-')) {
+        display.textContent = `-${display.textContent}`;
+    } else {
+        display.textContent = display.textContent.replace('-','')
+    }
+
+}
+
+const addPercentage = () => {
+    display.textContent = `${display.textContent / 100}`;
+}
+
 numberButtons.forEach(e =>{
     e.addEventListener('click', e =>{
         if (enteredDisplay.textContent.includes('=')){
@@ -133,3 +148,7 @@ decimalButton.addEventListener('click', () => {
         display.textContent += '.';''
     }
 });
+
+flipButton.addEventListener('click', doValueFlip);
+
+percentButton.addEventListener('click', addPercentage);
