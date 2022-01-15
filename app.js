@@ -48,11 +48,19 @@ const resetDisplay = () => {
     display.innerHTML = `<p id='calc-display'></p>`;
 }
 
+const resetEnteredDisplay= () => {
+    enteredDisplay.innerHTML = `<p id='entered-display'></p>`;
+}
+
 const resetAllDisplay = () => {
     display.innerHTML = `<p id='calc-display'></p>`;
     enteredDisplay.innerHTML = `<p id='entered-display'></p>`;
     storedValue = null;
     calculateValue = null;
+}
+
+const resetStoredValue = () => {
+    storedValue = null;
 }
 
 const storeDisplay = () => {
@@ -83,7 +91,8 @@ const doCalculation = () => {
 numberButtons.forEach(e =>{
     e.addEventListener('click', e =>{
         if (enteredDisplay.textContent.includes('=')){
-            resetDisplay();
+            resetEnteredDisplay();
+            resetStoredValue();
         }
         displayNumber(e);
     })
@@ -119,8 +128,6 @@ decimalButton.addEventListener('click', () => {
     if (display.textContent.includes('.')) {
 
     } else {
-        // storeValue();
-        // storedValue += '.';
         display.textContent += '.';''
     }
 });
