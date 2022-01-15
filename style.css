@@ -27,7 +27,7 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    flex-direction: column;
+    flex-flow: column wrap;
     padding: 10px;
     gap: 0px;
 }
@@ -78,6 +78,16 @@ body {
 }
 
 .number {
+    /* color: #b3b3b3; */
+    color: #9c7274;
+}
+
+.delete {
+    /* color: #b3b3b3; */
+    color: #9c7274;
+}
+
+#decimal {
     /* color: #b3b3b3; */
     color: #9c7274;
 }

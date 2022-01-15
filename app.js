@@ -4,6 +4,8 @@ const multiply = (intA, intB) => intA * intB;
 const divide = (intA, intB) => intA / intB;
 const numberButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
+const deleteButton = document.querySelector('.delete');
+const decimalButton = document.querySelector('#decimal');
 const display = document.querySelector('#calc-display');
 const enteredDisplay = document.querySelector('#entered-display');
 const resetButton = document.querySelector('.reset');
@@ -15,11 +17,11 @@ let enteredOperator;
 
 const displayNumber = input => {
     display.textContent += +input.srcElement.innerText;
-};
+}
 
 const storeValue = () => {
     storedValue = +display.textContent;
-};
+}
 
 const operate = (intA, intB, operator) => {
     switch (operator) {
@@ -36,7 +38,7 @@ const operate = (intA, intB, operator) => {
             return divide(intA, intB);
             break;
     }
-};
+}
 
 const storeOperator = input =>{
     enteredOperator = input.srcElement.innerText;
@@ -56,6 +58,8 @@ const resetAllDisplay = () => {
 const storeDisplay = () => {
     if (enteredOperator === '='){
         enteredDisplay.textContent += ` ${display.textContent} ${enteredOperator} ${storedValue}`;
+    } else if (!(enteredOperator)) {
+        enteredDisplay.textContent += ` ${display.textContent}`;
     } else {
         enteredDisplay.textContent += ` ${display.textContent} ${enteredOperator}`;
     }
@@ -76,9 +80,11 @@ const doCalculation = () => {
         }
 }
 
-
 numberButtons.forEach(e =>{
     e.addEventListener('click', e =>{
+        if (enteredDisplay.textContent.includes('=')){
+            resetDisplay();
+        }
         displayNumber(e);
     })
 });
@@ -102,3 +108,19 @@ calculate.addEventListener('click', e => {
     storeDisplay();
     resetDisplay();
 });
+
+deleteButton.addEventListener('click', () => {
+    // display.textContent.slice(0, -1)
+    let x = display.textContent
+    display.textContent = x.slice(0, -1);
+});
+
+// decimalButton.addEventListener('click', () => {
+//     if (display.textContent.includes('.')) {
+
+//     } else {
+//         storeValue();
+//         storedValue += '.';
+//         display.textContent += '.';''
+//     }
+// });d
